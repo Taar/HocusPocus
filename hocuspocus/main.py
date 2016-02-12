@@ -118,13 +118,9 @@ def unlock_door(door_controller, ms=5000):
         door_controller.relays(activate=False)
         return relay_error
 
-    door_controller.turn_off_led(door_controller.red_pin)
-
     door_controller.activate_pin(door_controller.green_pin, ms=5000)
 
     door_controller.relays(activate=False)
-
-    door_controller.turn_on_led(door_controller.red_pin)
 
     relay_error = check_relays(door_controller, 3,
                                first=door_controller.low,

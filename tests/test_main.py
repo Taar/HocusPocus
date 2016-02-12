@@ -279,10 +279,8 @@ class TestUnlockDoor():
         call_list = door_controller.mock_calls
         assert call_list == [
             call.relays(activate=True),
-            call.turn_off_led(door_controller.red_pin),
             call.activate_pin(door_controller.green_pin, ms=5000),
             call.relays(activate=False),
-            call.turn_on_led(door_controller.red_pin),
         ]
 
     def test_second_relay_check_fails(self,
@@ -318,10 +316,8 @@ class TestUnlockDoor():
         call_list = door_controller.mock_calls
         assert call_list == [
             call.relays(activate=True),
-            call.turn_off_led(door_controller.red_pin),
             call.activate_pin(door_controller.green_pin, ms=5000),
             call.relays(activate=False),
-            call.turn_on_led(door_controller.red_pin),
         ]
 
     def test_third_relay_check_fails(self,
@@ -403,10 +399,8 @@ class TestUnlockDoor():
         call_list = door_controller.mock_calls
         assert call_list == [
             call.relays(activate=True),
-            call.turn_off_led(door_controller.red_pin),
             call.activate_pin(door_controller.green_pin, ms=5000),
             call.relays(activate=False),
-            call.turn_on_led(door_controller.red_pin),
             call.relays(activate=False),
         ]
 
