@@ -226,14 +226,15 @@ def handle_usr1(lock, door_controller, error_path, *args):
     door_thread.start()
 
 
-def exit_gracefully(pid_path, *args):
+def exit_gracefully(pid_path, door_controller, *args):
     remove_pid_file(pid_path)
+    door_controller.clean_up()
     sys.exit(1)
 
 
 def main(pid_path, error_path, door_controller):
 
-    exit_callback = partial(exit_gracefully, pid_path)
+    exit_callback = partial(exit_gracefully, pid_path, door_controller)
     # check SIGINT (ctrl-c)
     signal.signal(signal.SIGINT, exit_callback)
     signal.signal(signal.SIGTERM, exit_callback)

@@ -12,12 +12,11 @@ if __name__ == '__main__':
 
     config = configparser.ConfigParser()
     config.read_file(args.ini_file)
-    paths = config.get('paths')
 
     door_controller = DoorController(GPIO)
 
     main(
-        paths.pid_file,
-        paths.error_file,
+        config.get('paths', 'pid_file'),
+        config.get('paths', 'error_file'),
         door_controller
     )

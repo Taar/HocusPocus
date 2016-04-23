@@ -75,6 +75,11 @@ class DoorController():
     def low(self):
         return self.GPIO.LOW
 
+    def clean_up(self):
+        self.turn_off_led(self.green_pin)
+        self.turn_off_led(self.red_pin)
+        self.relays(False)
+
     def turn_on_led(self, pin):
         self.GPIO.output(pin, self.high)
 
