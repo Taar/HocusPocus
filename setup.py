@@ -22,7 +22,7 @@ class PyTest(TestCommand):
 
 install_requires = [
     'setuptools',
-    # 'Adafruit_BBIO',
+    'Adafruit_BBIO',
 ]
 
 tests_require = [
@@ -52,7 +52,7 @@ setup(
         'Programming Language :: Python',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
-        'Topic :: Door Controller :: Authentication',
+        'Topic :: Door Controller',
     ],
     zip_safe=False,
     include_package_data=True,

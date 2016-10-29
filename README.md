@@ -2,6 +2,8 @@
 
 ## Configuration
 
+Supports Debian with kernel 4.1+
+
 Example config file (`prod.ini`):
 
 ```
@@ -92,6 +94,25 @@ find /sys/devices/virtual/gpio -name "control" -exec chmod 0660 {} \;
 Make sure to change the user in the above script if it differs and add debian to the gpio group.
 
 Note: Make sure `80-gpio.rules` (rw-r--r--) and `fix_udev_gpio.sh` (rwxr-x---) have the correct file permissions.
+
+If the above doesn't work, you can try to modify the permissions for the devices instead of the
+file links stored in `/sys/devices/virtual/`
+
+```
+chown -R debian:gpio /sys/devices/platform/ocp/*.gpio/gpio
+chown -R debian:gpio /sys/class/gpio
+find /sys/devices/platform/ocp/*.gpio/gpio -type d -exec chmod 2775 {} \;
+find /sys/devices/platform/ocp/*.gpio/gpio -name "direction" -exec chmod 0660 {} \;
+find /sys/devices/platform/ocp/*.gpio/gpio -name "edge" -exec chmod 0660 {} \;
+find /sys/devices/platform/ocp/*.gpio/gpio -name "value" -exec chmod 0660 {} \;
+
+find /sys/devices/platform/ocp/*.gpio/gpio -name "active_low" -exec chmod 0660 {} \;
+chmod 0220 /sys/class/gpio/export
+chmod 0220 /sys/class/gpio/unexport
+find /sys/devices/platform/ocp/*.gpio/gpio -name "uevent" -exec chmod 0660 {} \;
+find /sys/devices/platform/ocp/*.gpio/gpio -name "autosuspend_delay_ms" -exec chmod 0660 {} \;
+find /sys/devices/platform/ocp/*.gpio/gpio -name "control" -exec chmod 0660 {} \;
+```
 
 ## Relay States
 HIGH Relay OFF

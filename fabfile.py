@@ -5,7 +5,7 @@ import ConfigParser
 from functools import wraps
 from fabric.api import env
 from fabric.utils import _AttributeDict
-from fabric.operations import local, put, run
+from fabric.operations import local, put, sudo, run
 from fabric.context_managers import lcd, cd
 from fabric.contrib.files import exists
 
@@ -86,9 +86,3 @@ def deploy():
                                        'bin/python')
             run('{python_path} setup.py install'.format(
                 python_path=python_path))
-
-            # git_repo = 'http://github.com/Taar/adafruit-beaglebone-io-python'
-
-            # run('git clone {repo}'.format(repo=git_repo))
-            # switch to normal-user-patch branch
-            # python setup.py install
